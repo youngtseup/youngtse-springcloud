@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youngtse.common.mapper.SystemUserMapper">
+  <resultMap id="BaseResultMap" type="com.youngtse.common.domain.entity.SystemUser">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_uuid" jdbcType="VARCHAR" property="userUuid" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="account_non_expired" jdbcType="INTEGER" property="accountNonExpired" />
+    <result column="account_non_locked" jdbcType="INTEGER" property="accountNonLocked" />
+    <result column="credentials_non_expired" jdbcType="INTEGER" property="credentialsNonExpired" />
+    <result column="enabled" jdbcType="INTEGER" property="enabled" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+    <result column="role_id" jdbcType="BIGINT" property="roleId" />
+    <result column="personal_info_id" jdbcType="BIGINT" property="personalInfoId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_uuid, username, password, account_non_expired, account_non_locked, credentials_non_expired, 
+    enabled, create_time, modify_time, role_id, personal_info_id
+  </sql>
+  <resultMap id="QueryResultMap" type="com.youngtse.common.domain.response.SystemUserResponse">
+    <result column="user_uuid" jdbcType="VARCHAR" property="userUuid" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="account_non_expired" jdbcType="INTEGER" property="accountNonExpired" />
+    <result column="account_non_locked" jdbcType="INTEGER" property="accountNonLocked" />
+    <result column="credentials_non_expired" jdbcType="INTEGER" property="credentialsNonExpired" />
+    <result column="enabled" jdbcType="INTEGER" property="enabled" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+  </resultMap>
+  <sql id="Query_Column_List">
+    user_uuid, username, account_non_expired, account_non_locked, credentials_non_expired,
+    enabled, create_time, modify_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from system_user
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="getSystemUserByUsername" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from system_user
+    where username = #{username}
+    limit 1
+  </select>
+  <select id="queryListByPageRequest" resultMap="QueryResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from system_user
+    where 1=1
+    <if test="username != null and username != ''">
+      and username like concat('%', concat(#{username,jdbcType=VARCHAR}, '%'))
+    </if>
+    <if test="accountNonExpired != null">
+      and account_non_expired = #{accountNonExpired,jdbcType=INTEGER}
+    </if>
+    <if test="accountNonLocked != null">
+      and account_non_locked = #{accountNonLocked,jdbcType=INTEGER}
+    </if>
+    <if test="credentialsNonExpired != null">
+      and credentials_non_expired = #{credentialsNonExpired,jdbcType=INTEGER}
+    </if>
+    <if test="enabled != null">
+      and enabled = #{enabled,jdbcType=INTEGER}
+    </if>
+    <if test="startTime != null">
+      and create_time >= #{startTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="startTime != null">
+      and create_time <![CDATA[<=]]> #{endTime,jdbcType=TIMESTAMP}
+    </if>
+    order by create_time desc
+    limit #{offset},#{row}
+  </select>
+  <select id="queryCountByPageRequest" resultType="java.lang.Integer">
+    select count(1)
+    from system_user
+    where 1=1
+    <if test="username != null and username != ''">
+      and username like concat('%', concat(#{username,jdbcType=VARCHAR}, '%'))
+    </if>
+    <if test="accountNonExpired != null">
+      and account_non_expired = #{accountNonExpired,jdbcType=INTEGER}
+    </if>
+    <if test="accountNonLocked != null">
+      and account_non_locked = #{accountNonLocked,jdbcType=INTEGER}
+    </if>
+    <if test="credentialsNonExpired != null">
+      and credentials_non_expired = #{credentialsNonExpired,jdbcType=INTEGER}
+    </if>
+    <if test="enabled != null">
+      and enabled = #{enabled,jdbcType=INTEGER}
+    </if>
+    <if test="startTime != null">
+      and create_time >= #{startTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="startTime != null">
+      and create_time <![CDATA[<=]]> #{endTime,jdbcType=TIMESTAMP}
+    </if>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from system_user
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.youngtse.common.domain.entity.SystemUser">
+    insert into system_user (id, user_uuid, username, 
+      password, account_non_expired, account_non_locked, 
+      credentials_non_expired, enabled, create_time, 
+      modify_time, role_id, personal_info_id
+      )
+    values (#{id,jdbcType=BIGINT}, #{userUuid,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{accountNonExpired,jdbcType=INTEGER}, #{accountNonLocked,jdbcType=INTEGER}, 
+      #{credentialsNonExpired,jdbcType=INTEGER}, #{enabled,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{modifyTime,jdbcType=TIMESTAMP}, #{roleId,jdbcType=BIGINT}, #{personalInfoId,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.youngtse.common.domain.entity.SystemUser">
+    insert into system_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userUuid != null">
+        user_uuid,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="accountNonExpired != null">
+        account_non_expired,
+      </if>
+      <if test="accountNonLocked != null">
+        account_non_locked,
+      </if>
+      <if test="credentialsNonExpired != null">
+        credentials_non_expired,
+      </if>
+      <if test="enabled != null">
+        enabled,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="modifyTime != null">
+        modify_time,
+      </if>
+      <if test="roleId != null">
+        role_id,
+      </if>
+      <if test="personalInfoId != null">
+        personal_info_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userUuid != null">
+        #{userUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="accountNonExpired != null">
+        #{accountNonExpired,jdbcType=INTEGER},
+      </if>
+      <if test="accountNonLocked != null">
+        #{accountNonLocked,jdbcType=INTEGER},
+      </if>
+      <if test="credentialsNonExpired != null">
+        #{credentialsNonExpired,jdbcType=INTEGER},
+      </if>
+      <if test="enabled != null">
+        #{enabled,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null">
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="roleId != null">
+        #{roleId,jdbcType=BIGINT},
+      </if>
+      <if test="personalInfoId != null">
+        #{personalInfoId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.youngtse.common.domain.entity.SystemUser">
+    update system_user
+    <set>
+      <if test="userUuid != null">
+        user_uuid = #{userUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="accountNonExpired != null">
+        account_non_expired = #{accountNonExpired,jdbcType=INTEGER},
+      </if>
+      <if test="accountNonLocked != null">
+        account_non_locked = #{accountNonLocked,jdbcType=INTEGER},
+      </if>
+      <if test="credentialsNonExpired != null">
+        credentials_non_expired = #{credentialsNonExpired,jdbcType=INTEGER},
+      </if>
+      <if test="enabled != null">
+        enabled = #{enabled,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null">
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="roleId != null">
+        role_id = #{roleId,jdbcType=BIGINT},
+      </if>
+      <if test="personalInfoId != null">
+        personal_info_id = #{personalInfoId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.youngtse.common.domain.entity.SystemUser">
+    update system_user
+    set user_uuid = #{userUuid,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      account_non_expired = #{accountNonExpired,jdbcType=INTEGER},
+      account_non_locked = #{accountNonLocked,jdbcType=INTEGER},
+      credentials_non_expired = #{credentialsNonExpired,jdbcType=INTEGER},
+      enabled = #{enabled,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      role_id = #{roleId,jdbcType=BIGINT},
+      personal_info_id = #{personalInfoId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

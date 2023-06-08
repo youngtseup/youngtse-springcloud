@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <context id="default" targetRuntime="MyBatis3">
+
+        <!-- 关闭mybatis generator备注和时间 -->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+            <property name="suppressDate" value="true"/>
+        </commentGenerator>
+
+        <!-- 数据库连接配置 -->
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/youngtse"
+                        userId="root"
+                        password="root"/>
+
+        <!-- 实体类文件的生成配置 -->
+        <javaModelGenerator targetPackage="com.youngtse.common.domain.entity.temp"
+                            targetProject="src/main/java">
+            <property name="enableSubPackages" value="true" />
+        </javaModelGenerator>
+        <!-- Mapper XM文件的生成配置L -->
+        <sqlMapGenerator targetPackage="mapper"
+                         targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+        <!-- Mapper Java文件的生成配置 -->
+        <javaClientGenerator targetPackage="com.youngtse.common.mapper"
+                             targetProject="src/main/java"
+                             type="XMLMAPPER">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+
+        <!-- 表的生成配置 -->
+        <table tableName="system_user"
+               enableSelectByExample="false"
+               enableDeleteByExample = "false"
+               enableCountByExample = "false"
+               enableUpdateByExample = "false"
+               domainObjectName="SystemUser"/>
+        <table tableName="system_role"
+               enableSelectByExample="false"
+               enableDeleteByExample = "false"
+               enableCountByExample = "false"
+               enableUpdateByExample = "false"
+               domainObjectName="SystemRole"/>
+        <table tableName="system_menu"
+               enableSelectByExample="false"
+               enableDeleteByExample = "false"
+               enableCountByExample = "false"
+               enableUpdateByExample = "false"
+               domainObjectName="SystemMenu"/>
+        <table tableName="role_menu_mapping"
+               enableSelectByExample="false"
+               enableDeleteByExample = "false"
+               enableCountByExample = "false"
+               enableUpdateByExample = "false"
+               domainObjectName="RoleMenuMapping"/>
+    </context>
+</generatorConfiguration>
