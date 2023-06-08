@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.youngtse.mapper.master.RoleMasterMapper">
+
+    <resultMap id="RoleResultMap" type="com.youngtse.domain.entity.Role">
+        <id column="id" property="id" />
+        <result column="role_name" property="roleName" />
+        <result column="description" property="description" />
+        <result column="create_time" property="createTime" />
+        <result column="modify_time" property="modifyTime" />
+    </resultMap>
+
+    <insert id="insertRole" parameterType="com.youngtse.domain.entity.Role">
+        INSERT INTO role (role_name, description, create_time, modify_time)
+        VALUES (#{roleName}, #{description}, #{createTime}, #{modifyTime})
+    </insert>
+
+    <update id="updateRole" parameterType="com.youngtse.domain.entity.Role">
+        UPDATE role
+        SET role_name = #{roleName}, description = #{description},
+            modify_time = #{modifyTime}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteRoleById" parameterType="Long">
+        DELETE FROM role
+        WHERE id = #{id}
+    </delete>
+
+    <select id="getRoleById" parameterType="Long" resultMap="RoleResultMap">
+        SELECT id, role_name, description, create_time, modify_time
+        FROM role
+        WHERE id = #{id}
+    </select>
+
+    <select id="getAllRoles" resultMap="RoleResultMap">
+        SELECT id, role_name, description, create_time, modify_time
+        FROM role
+    </select>
+
+</mapper>

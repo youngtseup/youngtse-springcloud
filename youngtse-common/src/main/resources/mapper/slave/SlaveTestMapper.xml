@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.youngtse.mapper.slave.SlaveTestMapper">
+
+    <resultMap id="SlaveTestMap" type="com.youngtse.domain.entity.SlaveTest">
+        <id property="id" column="id" />
+        <result property="slaveContent" column="slave_content" />
+    </resultMap>
+
+    <insert id="insertSlaveTest" parameterType="com.youngtse.domain.entity.SlaveTest">
+        insert into slave_test (slave_content) values (#{slaveContent})
+    </insert>
+
+    <select id="getSlaveTestById" resultMap="SlaveTestMap" parameterType="int">
+        select * from slave_test where id = #{id}
+    </select>
+
+    <update id="updateSlaveTest" parameterType="com.youngtse.domain.entity.SlaveTest">
+        update slave_test set slave_content = #{slaveContent} where id = #{id}
+    </update>
+
+    <delete id="deleteSlaveTest" parameterType="int">
+        delete from slave_test where id = #{id}
+    </delete>
+
+</mapper>

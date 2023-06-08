@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: my-consumer
+  cloud:
+    nacos:
+      discovery:
+        server-addr: http://localhost:8848
+      config:
+        server-addr: http://localhost:8848
+        file-extension: yaml
+server:
+  servlet:
+    context-path: /consumer
+    # 禁止创建cookie
+    session:
+      cookie:
+        name: ""
+        http-only: true
+        path: /consumer
+        secure: true
