@@ -41,3 +41,6 @@ customize:
   # 日志路径
   logging:
     path: /tmp/logs
+  # 是否开始SpringSecurity权限验证 true开启 false关闭
+  security:
+    enabled: false

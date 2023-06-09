@@ -1,5 +1,6 @@
-package com.youngtse.common.domain.entity;
+package com.youngtse.common.domain.request.role;
 
+import com.youngtse.common.domain.request.PageRequest;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -10,17 +11,14 @@ import java.util.Date;
 
 /**
  * @author Youngtse
- * @title SystemRole
- * @date 2023/6/8 14:45
+ * @title QueryRoleRequest
+ * @date 2023/6/9 14:52
  */
+@ApiModel("角色查询参数")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel(description = "系统角色实体类")
-public class SystemRole {
-
-    @ApiModelProperty(value = "角色ID")
-    private Long id;
+public class QueryRoleRequest extends PageRequest {
 
     @ApiModelProperty(value = "角色")
     private String roleSubject;
@@ -28,15 +26,13 @@ public class SystemRole {
     @ApiModelProperty(value = "角色名称")
     private String roleName;
 
-    @ApiModelProperty(value = "角色描述")
-    private String roleRemark;
-
     @ApiModelProperty(value = "是否可用:0不可用,1可用")
     private Integer enabled;
 
-    @ApiModelProperty(value = "创建时间")
-    private Date createTime;
+    @ApiModelProperty(value = "开始时间")
+    private String startTime;
 
-    @ApiModelProperty(value = "修改时间")
-    private Date modifyTime;
+    @ApiModelProperty(value = "结束时间")
+    private String endTime;
+
 }

@@ -1,7 +1,7 @@
 package com.youngtse.common.mapper;
 
 import com.youngtse.common.domain.entity.SystemUser;
-import com.youngtse.common.domain.request.SystemUserRequest;
+import com.youngtse.common.domain.request.user.UserPageRequest;
 import com.youngtse.common.domain.response.SystemUserResponse;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -24,7 +24,7 @@ public interface SystemUserMapper {
 
     SystemUser getSystemUserByUsername(@Param("username") String username);
 
-    List<SystemUserResponse> queryListByPageRequest(SystemUserRequest systemUserRequest);
+    List<SystemUserResponse> queryListByPageRequest(UserPageRequest userPageRequest);
 
-    int queryCountByPageRequest(SystemUserRequest systemUserRequest);
+    int queryCountByPageRequest(UserPageRequest userPageRequest);
 }

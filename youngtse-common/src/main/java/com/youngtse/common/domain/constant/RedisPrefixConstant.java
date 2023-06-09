@@ -4,7 +4,6 @@ package com.youngtse.common.domain.constant;
  * @Title: RedisPrefixConstant
  * @Date 2023/5/17 22:34
  * @Author Youngtse
- * @Description: TODO
  */
 public class RedisPrefixConstant {
     /**

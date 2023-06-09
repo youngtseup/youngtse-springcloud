@@ -10,7 +10,6 @@ import java.io.IOException;
  * @Title: AuthService
  * @Date 2023/5/17 23:10
  * @Author Youngtse
- * @Description: TODO
  */
 public interface AuthService {
 

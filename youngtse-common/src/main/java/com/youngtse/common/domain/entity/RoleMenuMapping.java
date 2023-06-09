@@ -12,7 +12,6 @@ import java.util.Date;
  * @author Youngtse
  * @title RoleMenuMapping
  * @date 2023/6/8 14:50
- * @description TODO
  */
 @Data
 @AllArgsConstructor

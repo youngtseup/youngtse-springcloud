@@ -10,7 +10,6 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
  * @Title: RedisConfig
  * @Date 2023/5/11 22:42
  * @Author Youngtse
- * @Description: TODO
  */
 @Configuration
 public class RedisConfig {

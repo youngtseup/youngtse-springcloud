@@ -14,7 +14,6 @@ import javax.annotation.Resource;
  * @Title: UserDetailServiceImpl
  * @Date 2023/5/24 0:05
  * @Author Youngtse
- * @Description: TODO
  */
 @Service
 public class UserDetailServiceImpl implements UserDetailsService {

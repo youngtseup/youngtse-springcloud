@@ -16,7 +16,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * @author Youngtse
  * @title Knife4jConfig
  * @date 2023/4/28 10:28
- * @description TODO
  */
 
 @Configuration

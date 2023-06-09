@@ -10,7 +10,6 @@ import org.springframework.context.annotation.ComponentScan;
  * @author Youngtse
  * @title MyConsumerApplication
  * @date 2023/4/27 18:19
- * @description TODO
  */
 @SpringBootApplication
 @EnableDiscoveryClient

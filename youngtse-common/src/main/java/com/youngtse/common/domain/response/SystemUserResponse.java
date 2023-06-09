@@ -12,16 +12,12 @@ import java.util.Date;
  * @author Youngtse
  * @title SystemUserResponse
  * @date 2023/6/8 19:09
- * @description TODO
  */
-@ApiModel("SystemUserResponse 用户查询返回实体类")
+@ApiModel("用户查询返回实体类")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class SystemUserResponse {
-
-    @ApiModelProperty(value = "用户UUID")
-    private String userUuid;
 
     @ApiModelProperty(value = "用户名")
     private String username;
@@ -39,9 +35,9 @@ public class SystemUserResponse {
     private Integer enabled;
 
     @ApiModelProperty(value = "创建时间")
-    private Date createTime;
+    private String createTime;
 
     @ApiModelProperty(value = "修改时间")
-    private Date modifyTime;
+    private String modifyTime;
 
 }

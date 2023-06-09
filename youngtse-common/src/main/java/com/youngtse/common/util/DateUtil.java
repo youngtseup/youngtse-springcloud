@@ -8,7 +8,6 @@ import java.util.Date;
  * @Title: DateUtil
  * @Date 2023/5/12 0:20
  * @Author Youngtse
- * @Description: TODO
  */
 public class DateUtil {
     public static final String YYYYMMDD_HHMMSS = "yyyy-MM-dd HH:mm:ss";

@@ -1,4 +1,4 @@
-package com.youngtse.common.domain.entity;
+package com.youngtse.common.domain.response;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -16,11 +16,8 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel(description = "系统角色实体类")
-public class SystemRole {
-
-    @ApiModelProperty(value = "角色ID")
-    private Long id;
+@ApiModel("角色查询返回实体类")
+public class SystemRoleResponse {
 
     @ApiModelProperty(value = "角色")
     private String roleSubject;
@@ -35,8 +32,8 @@ public class SystemRole {
     private Integer enabled;
 
     @ApiModelProperty(value = "创建时间")
-    private Date createTime;
+    private String createTime;
 
     @ApiModelProperty(value = "修改时间")
-    private Date modifyTime;
+    private String modifyTime;
 }

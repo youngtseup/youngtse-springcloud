@@ -13,7 +13,6 @@ import java.util.Collection;
  * @Title: UserDetail
  * @Date 2023/5/24 0:12
  * @Author Youngtse
- * @Description: TODO
  */
 @Data
 @AllArgsConstructor

@@ -8,7 +8,6 @@ import lombok.Getter;
  * @Title: AuthResultEnum
  * @Date 2023/5/13 2:31
  * @Author Youngtse
- * @Description: TODO
  */
 @AllArgsConstructor
 @Getter

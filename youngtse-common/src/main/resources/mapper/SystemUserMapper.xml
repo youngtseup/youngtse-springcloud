@@ -3,7 +3,6 @@
 <mapper namespace="com.youngtse.common.mapper.SystemUserMapper">
   <resultMap id="BaseResultMap" type="com.youngtse.common.domain.entity.SystemUser">
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="user_uuid" jdbcType="VARCHAR" property="userUuid" />
     <result column="username" jdbcType="VARCHAR" property="username" />
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="account_non_expired" jdbcType="INTEGER" property="accountNonExpired" />
@@ -16,22 +15,8 @@
     <result column="personal_info_id" jdbcType="BIGINT" property="personalInfoId" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, user_uuid, username, password, account_non_expired, account_non_locked, credentials_non_expired, 
+    id, username, password, account_non_expired, account_non_locked, credentials_non_expired,
     enabled, create_time, modify_time, role_id, personal_info_id
-  </sql>
-  <resultMap id="QueryResultMap" type="com.youngtse.common.domain.response.SystemUserResponse">
-    <result column="user_uuid" jdbcType="VARCHAR" property="userUuid" />
-    <result column="username" jdbcType="VARCHAR" property="username" />
-    <result column="account_non_expired" jdbcType="INTEGER" property="accountNonExpired" />
-    <result column="account_non_locked" jdbcType="INTEGER" property="accountNonLocked" />
-    <result column="credentials_non_expired" jdbcType="INTEGER" property="credentialsNonExpired" />
-    <result column="enabled" jdbcType="INTEGER" property="enabled" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
-  </resultMap>
-  <sql id="Query_Column_List">
-    user_uuid, username, account_non_expired, account_non_locked, credentials_non_expired,
-    enabled, create_time, modify_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -46,7 +31,7 @@
     where username = #{username}
     limit 1
   </select>
-  <select id="queryListByPageRequest" resultMap="QueryResultMap">
+  <select id="queryListByPageRequest" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from system_user
@@ -66,11 +51,11 @@
     <if test="enabled != null">
       and enabled = #{enabled,jdbcType=INTEGER}
     </if>
-    <if test="startTime != null">
-      and create_time >= #{startTime,jdbcType=TIMESTAMP}
+    <if test="startTime != null and startTime != ''">
+      and create_time >= #{startTime}
     </if>
-    <if test="startTime != null">
-      and create_time <![CDATA[<=]]> #{endTime,jdbcType=TIMESTAMP}
+    <if test="endTime != null and endTime != ''">
+      and create_time <![CDATA[<=]]> #{endTime}
     </if>
     order by create_time desc
     limit #{offset},#{row}
@@ -106,12 +91,12 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.youngtse.common.domain.entity.SystemUser">
-    insert into system_user (id, user_uuid, username, 
+    insert into system_user (id, username,
       password, account_non_expired, account_non_locked, 
       credentials_non_expired, enabled, create_time, 
       modify_time, role_id, personal_info_id
       )
-    values (#{id,jdbcType=BIGINT}, #{userUuid,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR},
       #{password,jdbcType=VARCHAR}, #{accountNonExpired,jdbcType=INTEGER}, #{accountNonLocked,jdbcType=INTEGER}, 
       #{credentialsNonExpired,jdbcType=INTEGER}, #{enabled,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
       #{modifyTime,jdbcType=TIMESTAMP}, #{roleId,jdbcType=BIGINT}, #{personalInfoId,jdbcType=BIGINT}
@@ -122,9 +107,6 @@
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
-      </if>
-      <if test="userUuid != null">
-        user_uuid,
       </if>
       <if test="username != null">
         username,
@@ -161,9 +143,6 @@
       <if test="id != null">
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="userUuid != null">
-        #{userUuid,jdbcType=VARCHAR},
-      </if>
       <if test="username != null">
         #{username,jdbcType=VARCHAR},
       </if>
@@ -199,9 +178,6 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.youngtse.common.domain.entity.SystemUser">
     update system_user
     <set>
-      <if test="userUuid != null">
-        user_uuid = #{userUuid,jdbcType=VARCHAR},
-      </if>
       <if test="username != null">
         username = #{username,jdbcType=VARCHAR},
       </if>
@@ -237,7 +213,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.youngtse.common.domain.entity.SystemUser">
     update system_user
-    set user_uuid = #{userUuid,jdbcType=VARCHAR},
+    set
       username = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
       account_non_expired = #{accountNonExpired,jdbcType=INTEGER},

@@ -18,7 +18,6 @@ import java.io.IOException;
  * @Title: AuthController
  * @Date 2023/5/12 0:51
  * @Author Youngtse
- * @Description: TODO
  */
 @RestController
 @Slf4j

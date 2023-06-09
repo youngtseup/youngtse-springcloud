@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
  * @Title: CaptchaResult
  * @Date 2023/5/17 23:24
  * @Author Youngtse
- * @Description: TODO
  */
 @Data
 @AllArgsConstructor

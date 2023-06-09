@@ -1,27 +1,26 @@
-package com.youngtse.common.domain.request;
+package com.youngtse.common.domain.request.user;
 
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotEmpty;
 import java.util.Date;
 
 /**
  * @author Youngtse
- * @title SystemUser
- * @date 2023/6/8 14:43
- * @description 系统用户实体类
+ * @title UpdateUserRequest
+ * @date 2023/6/9 15:35
  */
-@ApiModel("SystemUserRequest 用户查询参数")
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class SystemUserRequest extends PageRequest{
+public class UpdateUserRequest {
+
+    @ApiModelProperty(value = "用户id")
+    @NotEmpty(message = "用户id不能为空")
+    private Integer userId;
 
     @ApiModelProperty(value = "用户名")
     private String username;
+
+    @ApiModelProperty(value = "密码")
+    private String password;
 
     @ApiModelProperty(value = "账户是否过期:0已过期,1未过期")
     private Integer accountNonExpired;
@@ -35,9 +34,9 @@ public class SystemUserRequest extends PageRequest{
     @ApiModelProperty(value = "账户是否可用:0不可用,1可用")
     private Integer enabled;
 
-    @ApiModelProperty(value = "开始时间")
-    private Date startTime;
+    @ApiModelProperty(value = "角色ID")
+    private Long roleId;
 
-    @ApiModelProperty(value = "结束时间")
-    private Date endTime;
+    @ApiModelProperty(value = "个人信息ID")
+    private Long personalInfoId;
 }

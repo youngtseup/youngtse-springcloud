@@ -2,6 +2,7 @@ package com.youngtse.common.domain.request;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 /**
  * @author Youngtse
@@ -10,6 +11,7 @@ import io.swagger.annotations.ApiModelProperty;
  * @description 分页查询参数
  */
 @ApiModel(description = "分页查询参数")
+@Data
 public abstract class PageRequest {
     @ApiModelProperty(value = "当前页数", notes = "默认为1")
     private Integer page = 1;
@@ -24,7 +26,4 @@ public abstract class PageRequest {
         return (page - 1) * row;
     }
 
-    public Integer getRow() {
-        return row;
-    }
 }

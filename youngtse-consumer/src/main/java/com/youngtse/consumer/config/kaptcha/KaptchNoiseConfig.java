@@ -10,7 +10,6 @@ import java.awt.image.BufferedImage;
  * @Title: KaptchNoiseConfig
  * @Date 2023/5/11 23:54
  * @Author Youngtse
- * @Description: TODO
  */
 public class KaptchNoiseConfig extends Configurable implements NoiseProducer {
     @Override

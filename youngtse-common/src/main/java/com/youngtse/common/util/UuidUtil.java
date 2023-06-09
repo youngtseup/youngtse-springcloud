@@ -6,7 +6,6 @@ import java.util.UUID;
  * @Title: UuidUtil
  * @Date 2023/5/13 2:19
  * @Author Youngtse
- * @Description: TODO
  */
 public class UuidUtil {
 

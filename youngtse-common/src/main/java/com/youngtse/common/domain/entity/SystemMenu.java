@@ -12,7 +12,6 @@ import java.util.Date;
  * @author Youngtse
  * @title SystemMenu
  * @date 2023/6/8 14:47
- * @description TODO
  */
 @Data
 @AllArgsConstructor
@@ -22,9 +21,6 @@ public class SystemMenu {
 
     @ApiModelProperty(value = "菜单ID")
     private Long id;
-
-    @ApiModelProperty(value = "菜单UUID")
-    private String menuUuid;
 
     @ApiModelProperty(value = "菜单名称")
     private String menuName;

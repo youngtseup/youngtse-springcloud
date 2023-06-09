@@ -11,7 +11,6 @@ import java.io.Serializable;
  * @author Youngtse
  * @title Result
  * @date 2023/4/28 14:38
- * @description TODO
  */
 @Data
 @ApiModel(value = "Result 通用返回")

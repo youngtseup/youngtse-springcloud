@@ -23,7 +23,6 @@ import java.util.regex.Pattern;
  * @author Youngtse
  * @title GlobalExceptionHandler
  * @date 2023/4/28 16:44
- * @description TODO
  */
 @Order(Ordered.HIGHEST_PRECEDENCE)
 @RestControllerAdvice
@@ -55,7 +54,7 @@ public class GlobalExceptionHandler {
             errorMessage.append(error.getDefaultMessage()).append(";");
         }
         log.error("occur MethodArgumentNotValidException: {}", errorMessage.toString());
-        return Result.fail(errorMessage.toString());
+        return Result.fail(BaseResultEnum.PARAM_ERROR.getCode(), errorMessage.toString());
     }
 
     /**

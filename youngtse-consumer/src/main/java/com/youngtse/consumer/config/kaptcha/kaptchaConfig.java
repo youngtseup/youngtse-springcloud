@@ -11,7 +11,6 @@ import java.util.Properties;
  * @Title: kaptchaConfig
  * @Date 2023/5/11 23:43
  * @Author Youngtse
- * @Description: TODO
  */
 @Configuration
 public class kaptchaConfig {

@@ -8,7 +8,6 @@ import lombok.Getter;
  * @author Youngtse
  * @title BusinessException
  * @date 2023/4/28 15:55
- * @description TODO
  */
 @Getter
 public class BusinessException extends RuntimeException{

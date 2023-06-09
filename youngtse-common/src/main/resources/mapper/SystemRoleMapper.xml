@@ -3,13 +3,15 @@
 <mapper namespace="com.youngtse.common.mapper.SystemRoleMapper">
   <resultMap id="BaseResultMap" type="com.youngtse.common.domain.entity.SystemRole">
     <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="role_subject" jdbcType="VARCHAR" property="roleSubject" />
     <result column="role_name" jdbcType="VARCHAR" property="roleName" />
     <result column="role_remark" jdbcType="VARCHAR" property="roleRemark" />
+    <result column="enabled" jdbcType="INTEGER" property="enabled" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="role_state" jdbcType="INTEGER" property="roleState" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, role_name, role_remark, create_time, role_state
+    id, role_subject, role_name, role_remark, enabled, create_time, modify_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -17,77 +19,138 @@
     from system_role
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="queryListByRoleRequest" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" />
+    from system_role
+    <where>
+    1 = 1
+      <if test="roleSubject != null and roleSubject != ''">
+        and role_subject like concat('%', concat(#{roleSubject}, '%'))
+      </if>
+      <if test="roleName != null and roleName != ''">
+        and role_name like concat('%', concat(#{roleName}, '%'))
+      </if>
+      <if test="enabled != null">
+        and enabled = #{enabled}
+      </if>
+      <if test="startTime != null and startTime != ''">
+        and create_time >= #{startTime}
+      </if>
+      <if test="endTime != null and endTime != ''">
+        and create_time <![CDATA[<=]]> #{endTime}
+      </if>
+    </where>
+    order by create_time desc
+    limit #{offset},#{row}
+  </select>
+  <select id="queryCountByRoleRequest" resultType="java.lang.Integer">
+    select count(1)
+    from system_role
+    <where>
+      1 = 1
+      <if test="roleSubject != null and roleSubject != ''">
+        and role_subject like concat('%', concat(#{roleSubject}, '%'))
+      </if>
+      <if test="roleName != null and roleName != ''">
+        and role_name like concat('%', concat(#{roleName}, '%'))
+      </if>
+      <if test="enabled != null">
+        and enabled = #{enabled}
+      </if>
+      <if test="startTime != null and startTime != ''">
+        and create_time >= #{startTime}
+      </if>
+      <if test="endTime != null and endTime != ''">
+        and create_time <![CDATA[<=]]> #{endTime}
+      </if>
+    </where>
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from system_role
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.youngtse.common.domain.entity.SystemRole">
-    insert into system_role (id, role_name, role_remark, 
-      create_time, role_state)
-    values (#{id,jdbcType=INTEGER}, #{roleName,jdbcType=VARCHAR}, #{roleRemark,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{roleState,jdbcType=INTEGER})
+    insert into system_role (role_subject, role_name, role_remark, enabled,
+      create_time, modify_time)
+    values (#{roleSubject,jdbcType=VARCHAR}, #{roleName,jdbcType=VARCHAR}, #{roleRemark,jdbcType=VARCHAR},
+            #{enabled,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.youngtse.common.domain.entity.SystemRole">
     insert into system_role
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
+      <if test="roleSubject != null and roleSubject !=''">
+        role_subject,
       </if>
-      <if test="roleName != null">
+      <if test="roleName != null and roleName != ''">
         role_name,
       </if>
-      <if test="roleRemark != null">
+      <if test="roleRemark != null and roleRemark != ''">
         role_remark,
+      </if>
+      <if test="enabled != null">
+        enabled,
       </if>
       <if test="createTime != null">
         create_time,
       </if>
-      <if test="roleState != null">
-        role_state,
+      <if test="modifyTime != null">
+        modify_time,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
+      <if test="roleSubject != null and roleSubject !=''">
+        #{roleSubject,jdbcType=VARCHAR},
       </if>
-      <if test="roleName != null">
+      <if test="roleName != null and roleName != ''">
         #{roleName,jdbcType=VARCHAR},
       </if>
-      <if test="roleRemark != null">
+      <if test="roleRemark != null and roleRemark != ''">
         #{roleRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="enabled != null">
+        #{enabled,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="roleState != null">
-        #{roleState,jdbcType=INTEGER},
+      <if test="modifyTime != null">
+        #{modifyTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.youngtse.common.domain.entity.SystemRole">
     update system_role
     <set>
-      <if test="roleName != null">
+      <if test="roleSubject != null and roleSubject !=''">
+        role_subject = #{roleSubject,jdbcType=VARCHAR}
+      </if>
+      <if test="roleName != null and roleName != ''">
         role_name = #{roleName,jdbcType=VARCHAR},
       </if>
-      <if test="roleRemark != null">
+      <if test="roleRemark != null and roleRemark != ''">
         role_remark = #{roleRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="enabled != null">
+        enabled = #{enabled,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="roleState != null">
-        role_state = #{roleState,jdbcType=INTEGER},
+      <if test="modifyTime != null">
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.youngtse.common.domain.entity.SystemRole">
     update system_role
-    set role_name = #{roleName,jdbcType=VARCHAR},
+    set
+      role_subject = #{roleSubject,jdbcType=VARCHAR},
+      role_name = #{roleName,jdbcType=VARCHAR},
       role_remark = #{roleRemark,jdbcType=VARCHAR},
+      enabled = #{enabled,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
-      role_state = #{roleState,jdbcType=INTEGER}
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

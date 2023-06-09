@@ -10,16 +10,17 @@ import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 
+import javax.annotation.Resource;
+
 /**
  * @Title: com.youngtse.RedisTest
  * @Date 2023/5/11 21:57
  * @Author Youngtse
- * @Description: TODO
  */
 @SpringBootTest
 @Slf4j
 public class RedisTest {
-    @Autowired
+    @Resource
     private RedisTemplate redisTemplate;
 
     @Test
