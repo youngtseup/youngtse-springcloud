@@ -13,7 +13,8 @@ import java.util.Map;
  * @Date 2023/5/30 21:56
  * @Author Youngtse
  */
-public class RSAUtil {
+public class RsaUtil {
+
     public static Map<String, String> keyPairGenerator() {
         // 使用RSA算法生成密钥对
         KeyPairGenerator keyPairGenerator = null;

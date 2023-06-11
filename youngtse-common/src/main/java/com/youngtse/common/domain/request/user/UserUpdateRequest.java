@@ -1,26 +1,25 @@
-package com.youngtse.common.domain.response;
+package com.youngtse.common.domain.request.user;
 
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import javax.validation.constraints.NotEmpty;
 
 /**
  * @author Youngtse
- * @title SystemUserResponse
- * @date 2023/6/8 19:09
+ * @title UpdateUserRequest
+ * @date 2023/6/9 15:35
  */
-@ApiModel("用户查询返回实体类")
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class SystemUserResponse {
+public class UserUpdateRequest {
+
+    @ApiModelProperty(value = "用户id")
+    @NotEmpty(message = "用户id不能为空")
+    private Integer userId;
 
     @ApiModelProperty(value = "用户名")
     private String username;
+
+    @ApiModelProperty(value = "密码")
+    private String password;
 
     @ApiModelProperty(value = "账户是否过期:0已过期,1未过期")
     private Integer accountNonExpired;
@@ -34,10 +33,9 @@ public class SystemUserResponse {
     @ApiModelProperty(value = "账户是否可用:0不可用,1可用")
     private Integer enabled;
 
-    @ApiModelProperty(value = "创建时间")
-    private String createTime;
+    @ApiModelProperty(value = "角色ID")
+    private Long roleId;
 
-    @ApiModelProperty(value = "修改时间")
-    private String modifyTime;
-
+    @ApiModelProperty(value = "个人信息ID")
+    private Long personalInfoId;
 }

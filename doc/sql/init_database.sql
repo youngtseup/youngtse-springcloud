@@ -1,6 +1,6 @@
 create database if not exists youngtse default character set utf8 default COLLATE utf8_unicode_ci;
 use youngtse;
-drop table if exists `system_user`;
+drop table if exists `system_role`;
 CREATE TABLE `system_role` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `role_subject` varchar(20) COLLATE utf8_unicode_ci NOT NULL COMMENT '角色:要求英文小写',
@@ -12,7 +12,7 @@ CREATE TABLE `system_role` (
   PRIMARY KEY (`id`),
   KEY `create_time_idx` (`create_time`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='角色表';
-drop table if exists `system_role`;
+drop table if exists `system_user`;
 CREATE TABLE `system_user` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT '用户名',

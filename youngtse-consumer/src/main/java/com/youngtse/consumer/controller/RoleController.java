@@ -1,10 +1,9 @@
 package com.youngtse.consumer.controller;
 
-import com.youngtse.common.domain.entity.SystemRole;
-import com.youngtse.common.domain.request.role.AddRoleRequest;
-import com.youngtse.common.domain.request.role.QueryRoleRequest;
-import com.youngtse.common.domain.request.role.UpdateRoleRequest;
-import com.youngtse.common.domain.response.SystemRoleResponse;
+import com.youngtse.common.domain.request.role.RoleAddRequest;
+import com.youngtse.common.domain.request.role.RolePageRequest;
+import com.youngtse.common.domain.request.role.RoleUpdateRequest;
+import com.youngtse.common.domain.response.RoleResponse;
 import com.youngtse.common.domain.result.Page;
 import com.youngtse.common.domain.result.Result;
 import com.youngtse.consumer.service.RoleService;
@@ -34,29 +33,29 @@ public class RoleController {
 
     @ApiOperation("新增角色")
     @PostMapping("/role/add")
-    public Result addRole(@Validated @RequestBody AddRoleRequest addRoleRequest) {
-        roleService.addSystemRole(addRoleRequest);
+    public Result addRole(@Validated @RequestBody RoleAddRequest roleAddRequest) {
+        roleService.addSystemRole(roleAddRequest);
         return Result.success();
     }
 
     @ApiOperation("修改角色")
     @PostMapping("/role/modify")
-    public Result modifyRole(@Validated @RequestBody UpdateRoleRequest updateRoleRequest) {
-        roleService.modifyRoleByRoleId(updateRoleRequest);
+    public Result modifyRole(@Validated @RequestBody RoleUpdateRequest roleUpdateRequest) {
+        roleService.modifyRoleByRoleId(roleUpdateRequest);
         return Result.success();
     }
 
     @ApiOperation("删除角色")
     @PostMapping("/role/delete/{roleId}")
-    public Result deleteRole(@PathVariable("roleId") @NotEmpty(message = "角色id不能为空") Integer roleId) {
+    public Result deleteRole(@PathVariable("roleId") @NotEmpty(message = "角色id不能为空") Long roleId) {
         roleService.deleteRoleByRoleId(roleId);
         return Result.success();
     }
 
     @ApiOperation("查询角色")
     @PostMapping("/role/query")
-    public Result queryRoleList(@RequestBody QueryRoleRequest queryRoleRequest) {
-        Page<SystemRoleResponse> page = roleService.queryList(queryRoleRequest);
+    public Result queryRoleList(@RequestBody RolePageRequest rolePageRequest) {
+        Page<RoleResponse> page = roleService.queryList(rolePageRequest);
         return Result.success(page);
     }
 }

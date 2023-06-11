@@ -17,7 +17,8 @@ public enum BaseResultEnum implements CommonResultEnum {
     ERROR("-1", "系统异常"),
     REQUEST_METHOD_ERROR("2000", "请求方法错误"),
     PARAM_ERROR("2001", "参数错误"),
-    RECODE_NOT_EXIST("2002", "记录不存在")
+    RECODE_NOT_EXIST("2002", "记录不存在"),
+    DECRYPT_ERROR("2003", "解密失败")
     ;
 
     private String code;

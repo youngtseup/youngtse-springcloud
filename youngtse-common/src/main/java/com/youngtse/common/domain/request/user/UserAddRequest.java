@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
-import java.util.Date;
 
 /**
  * @author Youngtse
@@ -20,7 +19,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @ApiModel("新增用户参数")
-public class AddUserRequest {
+public class UserAddRequest {
 
     @ApiModelProperty(value = "用户名")
     @NotEmpty(message = "用户名不能为空")

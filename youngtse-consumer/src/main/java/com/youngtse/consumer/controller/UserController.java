@@ -1,9 +1,9 @@
 package com.youngtse.consumer.controller;
 
 import com.youngtse.common.domain.request.user.UserPageRequest;
-import com.youngtse.common.domain.request.user.AddUserRequest;
-import com.youngtse.common.domain.request.user.UpdateUserRequest;
-import com.youngtse.common.domain.response.SystemUserResponse;
+import com.youngtse.common.domain.request.user.UserAddRequest;
+import com.youngtse.common.domain.request.user.UserUpdateRequest;
+import com.youngtse.common.domain.response.UserResponse;
 import com.youngtse.common.domain.result.Page;
 import com.youngtse.common.domain.result.Result;
 import com.youngtse.consumer.service.UserService;
@@ -32,29 +32,29 @@ public class UserController {
 
     @ApiOperation("新增用户")
     @PostMapping("/user/add")
-    public Result addRole(@Validated @RequestBody AddUserRequest addUserRequest) {
-//        userService.addSystemUser(addUserRequest);
+    public Result addRole(@Validated @RequestBody UserAddRequest userAddRequest) {
+        userService.addSystemUser(userAddRequest);
         return Result.success();
     }
 
     @ApiOperation("修改用户")
     @PostMapping("/user/modify")
-    public Result modifyRole(@Validated @RequestBody UpdateUserRequest updateUserRequest) {
-//        userService.modifyUserByUserId(updateUserRequest);
+    public Result modifyRole(@Validated @RequestBody UserUpdateRequest userUpdateRequest) {
+        userService.modifyUserByUserId(userUpdateRequest);
         return Result.success();
     }
 
     @ApiOperation("删除用户")
     @PostMapping("/user/delete/{userId}")
-    public Result deleteRole(@PathVariable("userId") @NotEmpty(message = "用户id不能为空") Integer userId) {
-//        userService.deleteUserByUserId(userId);
+    public Result deleteRole(@PathVariable("userId") @NotEmpty(message = "用户id不能为空") Long userId) {
+        userService.deleteUserByUserId(userId);
         return Result.success();
     }
     
     @PostMapping("/user/queryByCondition")
     @ApiOperation("用户查询")
     public Result queryByCondition(@RequestBody UserPageRequest userPageRequest) {
-        Page<SystemUserResponse> page = userService.querySystemUser(userPageRequest);
+        Page<UserResponse> page = userService.querySystemUser(userPageRequest);
         return Result.success(page);
     }
     

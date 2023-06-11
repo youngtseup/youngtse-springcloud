@@ -1,10 +1,9 @@
 package com.youngtse.consumer.service;
 
-import com.youngtse.common.domain.entity.SystemRole;
-import com.youngtse.common.domain.request.role.AddRoleRequest;
-import com.youngtse.common.domain.request.role.QueryRoleRequest;
-import com.youngtse.common.domain.request.role.UpdateRoleRequest;
-import com.youngtse.common.domain.response.SystemRoleResponse;
+import com.youngtse.common.domain.request.role.RoleAddRequest;
+import com.youngtse.common.domain.request.role.RolePageRequest;
+import com.youngtse.common.domain.request.role.RoleUpdateRequest;
+import com.youngtse.common.domain.response.RoleResponse;
 import com.youngtse.common.domain.result.Page;
 
 /**
@@ -13,11 +12,11 @@ import com.youngtse.common.domain.result.Page;
  * @date 2023/6/9 09:50
  */
 public interface RoleService {
-    void addSystemRole(AddRoleRequest addRoleRequest);
+    void addSystemRole(RoleAddRequest roleAddRequest);
 
-    void modifyRoleByRoleId(UpdateRoleRequest updateRoleRequest);
+    void modifyRoleByRoleId(RoleUpdateRequest roleUpdateRequest);
 
-    void deleteRoleByRoleId(Integer id);
+    void deleteRoleByRoleId(Long id);
 
-    Page<SystemRoleResponse> queryList(QueryRoleRequest queryRoleRequest);
+    Page<RoleResponse> queryList(RolePageRequest rolePageRequest);
 }

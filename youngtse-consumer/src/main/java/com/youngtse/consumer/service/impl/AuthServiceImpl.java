@@ -5,7 +5,9 @@ import com.youngtse.common.domain.constant.RedisPrefixConstant;
 import com.youngtse.common.domain.request.LoginRequest;
 import com.youngtse.common.domain.response.CaptchaResponse;
 import com.youngtse.common.enums.AuthResultEnum;
+import com.youngtse.common.enums.BaseResultEnum;
 import com.youngtse.common.exception.BusinessException;
+import com.youngtse.common.util.RsaUtil;
 import com.youngtse.consumer.service.AuthService;
 import com.youngtse.common.util.UuidUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -51,6 +53,9 @@ public class AuthServiceImpl implements AuthService {
     @Value("${customize.jwtExpirationTime}")
     private Long jwtExpirationTime;
 
+    @Value("${customize.privateKey}")
+    private String privateKey;
+
 
     @Override
     public CaptchaResponse getCaptcha(HttpServletRequest request) throws IOException {
@@ -92,7 +97,14 @@ public class AuthServiceImpl implements AuthService {
         checkRightCaptcha(loginRequest.getCaptcha(), loginRequest.getCaptchaUuid());
         // security登录
         String username = loginRequest.getUsername();
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, loginRequest.getPassword());
+        String decryptPwd = loginRequest.getPassword();
+        String encryptPwd = null;
+        try {
+            encryptPwd = RsaUtil.decrypt(privateKey, decryptPwd);
+        } catch (Exception e) {
+            throw new BusinessException(BaseResultEnum.DECRYPT_ERROR);
+        }
+        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, encryptPwd);
         authenticationManager.authenticate(authenticationToken);
         //生成JWT
         String onlineKey = RedisPrefixConstant.ONLINE_PREFIX + username;

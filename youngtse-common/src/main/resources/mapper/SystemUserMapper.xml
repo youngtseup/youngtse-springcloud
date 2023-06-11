@@ -91,12 +91,12 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.youngtse.common.domain.entity.SystemUser">
-    insert into system_user (id, username,
+    insert into system_user (username,
       password, account_non_expired, account_non_locked, 
       credentials_non_expired, enabled, create_time, 
       modify_time, role_id, personal_info_id
       )
-    values (#{id,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR},
+    values (#{username,jdbcType=VARCHAR},
       #{password,jdbcType=VARCHAR}, #{accountNonExpired,jdbcType=INTEGER}, #{accountNonLocked,jdbcType=INTEGER}, 
       #{credentialsNonExpired,jdbcType=INTEGER}, #{enabled,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
       #{modifyTime,jdbcType=TIMESTAMP}, #{roleId,jdbcType=BIGINT}, #{personalInfoId,jdbcType=BIGINT}

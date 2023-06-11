@@ -17,7 +17,7 @@ import javax.validation.constraints.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @ApiModel("新增角色参数")
-public class AddRoleRequest {
+public class RoleAddRequest {
 
     @ApiModelProperty(value = "角色", notes = "英文小写", required = true)
     @NotEmpty(message = "角色不能为空")
