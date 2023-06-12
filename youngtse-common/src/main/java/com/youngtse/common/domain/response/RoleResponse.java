@@ -17,6 +17,9 @@ import lombok.NoArgsConstructor;
 @ApiModel("角色查询返回实体类")
 public class RoleResponse {
 
+    @ApiModelProperty(value = "角色ID")
+    private Long id;
+
     @ApiModelProperty(value = "角色")
     private String roleSubject;
 

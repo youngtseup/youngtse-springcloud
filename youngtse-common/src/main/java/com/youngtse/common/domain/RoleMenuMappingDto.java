@@ -1,4 +1,4 @@
-package com.youngtse.common.domain.response;
+package com.youngtse.common.domain;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -9,15 +9,15 @@ import lombok.NoArgsConstructor;
 import java.util.Date;
 
 /**
- * @Title: MenuResponse
- * @Date 2023/6/11 15:19
- * @Author Youngtse
+ * @author Youngtse
+ * @title RoleMenuMappingDto
+ * @date 2023/6/12 17:49
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel("菜单查询返回实体类")
-public class MenuResponse {
+@ApiModel("角色菜单映射关系实体类")
+public class RoleMenuMappingDto {
 
     @ApiModelProperty(value = "菜单ID")
     private Long id;
@@ -31,9 +31,6 @@ public class MenuResponse {
     @ApiModelProperty(value = "路由URL")
     private String routerUrl;
 
-    @ApiModelProperty(value = "菜单描述")
-    private String menuRemark;
-
     @ApiModelProperty(value = "上一级菜单ID")
     private Long pid;
 
@@ -43,12 +40,4 @@ public class MenuResponse {
     @ApiModelProperty(value = "菜单等级")
     private Integer menuLevel;
 
-    @ApiModelProperty(value = "是否可用:0不可用,1可用")
-    private Integer enabled;
-
-    @ApiModelProperty(value = "创建时间")
-    private Date createTime;
-
-    @ApiModelProperty(value = "修改时间")
-    private Date modifyTime;
 }

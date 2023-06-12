@@ -12,6 +12,7 @@ import com.youngtse.common.mapper.SystemMenuMapper;
 import com.youngtse.consumer.service.MenuService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.security.core.parameters.P;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -22,6 +23,7 @@ import java.util.List;
  * @Date 2023/6/11 15:58
  * @Author Youngtse
  */
+@Service
 public class MenuServiceImpl implements MenuService {
 
     @Resource
@@ -38,6 +40,12 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public void deleteMenu(Long menuId) {
+        MenuPageRequest menuPageRequest = new MenuPageRequest();
+        menuPageRequest.setPid(menuId);
+        int count = systemMenuMapper.queryCountByMenuRequest(menuPageRequest);
+        if (count > 0) {
+            throw new BusinessException(BaseResultEnum.MENU_PID_EXIST);
+        }
         int row = systemMenuMapper.deleteByPrimaryKey(menuId);
         if (row < 1) {
             throw new BusinessException(BaseResultEnum.RECODE_NOT_EXIST);

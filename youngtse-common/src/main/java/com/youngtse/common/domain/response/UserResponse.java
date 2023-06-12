@@ -17,6 +17,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UserResponse {
 
+    @ApiModelProperty(value = "用户ID")
+    private Long id;
+
     @ApiModelProperty(value = "用户名")
     private String username;
 
