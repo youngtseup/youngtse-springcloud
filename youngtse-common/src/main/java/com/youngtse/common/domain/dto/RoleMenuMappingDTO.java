@@ -1,12 +1,10 @@
-package com.youngtse.common.domain;
+package com.youngtse.common.domain.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.Date;
 
 /**
  * @author Youngtse
@@ -17,7 +15,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @ApiModel("角色菜单映射关系实体类")
-public class RoleMenuMappingDto {
+public class RoleMenuMappingDTO {
 
     @ApiModelProperty(value = "菜单ID")
     private Long id;

@@ -31,6 +31,9 @@ spring:
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
+  # mybatis开启日志信息
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 # 自定义配置
 customize:

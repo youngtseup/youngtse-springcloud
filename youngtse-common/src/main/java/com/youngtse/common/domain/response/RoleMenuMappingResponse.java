@@ -1,6 +1,6 @@
 package com.youngtse.common.domain.response;
 
-import com.youngtse.common.domain.RoleMenuMappingDto;
+import com.youngtse.common.domain.dto.RoleMenuMappingDTO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -27,5 +27,5 @@ public class RoleMenuMappingResponse {
     private String roleName;
 
     @ApiModelProperty(value = "角色菜单映射")
-    private List<RoleMenuMappingDto> menuList;
+    private List<RoleMenuMappingDTO> menuList;
 }

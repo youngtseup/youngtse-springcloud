@@ -10,17 +10,40 @@
   <sql id="Base_Column_List">
     id, role_id, menu_id, create_time
   </sql>
+  <resultMap id="RoleMenuMappingDTOMap" type="com.youngtse.common.domain.dto.RoleMenuMappingDTO">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="menu_name" jdbcType="VARCHAR" property="menuName" />
+    <result column="menu_icon" jdbcType="VARCHAR" property="menuIcon" />
+    <result column="router_url" jdbcType="VARCHAR" property="routerUrl" />
+    <result column="pid" jdbcType="BIGINT" property="pid" />
+    <result column="sort_no" jdbcType="BIGINT" property="sortNo" />
+    <result column="menu_level" jdbcType="INTEGER" property="menuLevel" />
+  </resultMap>
+  <sql id="RoleMenuMapping_Column_List">
+    id, menu_name, menu_icon, router_url, pid, sort_no, menu_level
+  </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from role_menu_mapping
     where id = #{id,jdbcType=BIGINT}
   </select>
+  <select id="queryByRoleId" resultMap="RoleMenuMappingDTOMap">
+    select
+    <include refid="RoleMenuMapping_Column_List" />
+    from system_menu
+    where id in (
+        select menu_id from role_menu_mapping where role_id = #{roleId}
+    ) order by menu_level asc
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from role_menu_mapping
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.youngtse.common.domain.entity.RoleMenuMapping">
+    <delete id="deleteByRoleId">
+      delete from role_menu_mapping where role_id = #{roleId}
+    </delete>
+    <insert id="insert" parameterType="com.youngtse.common.domain.entity.RoleMenuMapping">
     insert into role_menu_mapping (id, role_id, menu_id, 
       create_time)
     values (#{id,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT}, #{menuId,jdbcType=BIGINT}, 
@@ -56,6 +79,13 @@
         #{createTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
+  </insert>
+  <insert id="insertBatch" parameterType="com.youngtse.common.domain.request.menu.mapping.RoleMenuMappingRequest">
+    insert into role_menu_mapping (role_id, menu_id, create_time)
+    values
+    <foreach collection="menuIdList" item="menuId" separator=",">
+      (#{roleId}, #{menuId}, now())
+    </foreach>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.youngtse.common.domain.entity.RoleMenuMapping">
     update role_menu_mapping

@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -21,7 +22,7 @@ import java.util.List;
 public class RoleMenuMappingRequest {
 
     @ApiModelProperty(value = "角色id")
-    @NotEmpty(message = "角色id不能为空")
+    @NotNull(message = "角色id不能为空")
     private Long roleId;
 
     @ApiModelProperty(value = "菜单id")

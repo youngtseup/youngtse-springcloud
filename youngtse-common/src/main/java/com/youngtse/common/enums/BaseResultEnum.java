@@ -19,7 +19,8 @@ public enum BaseResultEnum implements CommonResultEnum {
     PARAM_ERROR("2001", "参数错误"),
     RECODE_NOT_EXIST("2002", "记录不存在"),
     DECRYPT_ERROR("2003", "解密失败"),
-    MENU_PID_EXIST("2004", "该菜单存在对应的子菜单，请先删除子菜单")
+    MENU_PID_EXIST("2004", "该菜单存在对应的子菜单，请先删除子菜单"),
+    ROLE_NOT_EXIST("2005", "对应的角色不存在")
     ;
 
     private String code;
