@@ -1,13 +1,6 @@
 spring:
   application:
     name: my-consumer
-  cloud:
-    nacos:
-      discovery:
-        server-addr: http://localhost:8848
-      config:
-        server-addr: http://localhost:8848
-        file-extension: yaml
 server:
   servlet:
     context-path: /consumer
