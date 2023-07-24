@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true">
 
-    <springProperty name="LOG_HOME" scope="context" source="customize.logging.path" defaultValue="/tmp/logs"/>
+    <springProperty name="LOG_HOME" scope="context" source="customize.logging.path" defaultValue="/tmp/logs/"/>
     <springProperty name="APP_NAME" scope="context" source="spring.application.name" defaultValue="sdfLog"/>
 
 

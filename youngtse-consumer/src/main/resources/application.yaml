@@ -1,13 +1,6 @@
 server:
   port: 8992
 spring:
-  cloud:
-    nacos:
-      discovery:
-        server-addr: http://localhost:8848
-      config:
-        server-addr: http://localhost:8848
-        file-extension: yaml
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -50,7 +43,7 @@ customize:
   jwtExpirationTime: 60
   # 日志路径
   logging:
-    path: /tmp/logs
+    path: ${logs_path:/tmp/logs}
   # 是否开启SpringSecurity权限验证 true开启 false关闭
   security:
     enabled: false
